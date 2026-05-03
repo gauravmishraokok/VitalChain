@@ -68,8 +68,21 @@ router.post('/blockchain-event', async (req, res) => {
         const logData = req.body;
         
         if (logData.error) {
-            console.error('[BACKEND] Blockchain event error received:', logData.error);
-            return res.status(200).json({ status: "ignored_error" });
+            console.warn('[BACKEND] Blockchain OFFLINE, skipping log:', logData.error);
+            // Still emit a degraded event so the UI shows something
+            socketService.emit('blockchain:commit', {
+                tx_hash: null,
+                merkle_root: logData.merkle_root,
+                ipfs_cid: logData.ipfs_cid,
+                batch_size: logData.batch_size,
+                status: 'offline'
+            });
+            return res.status(200).json({ status: "blockchain_offline" });
+        }
+
+        // Only save to DB if we have a valid tx_hash
+        if (!logData.tx_hash) {
+            return res.status(200).json({ status: "skipped_no_tx_hash" });
         }
 
         // Save BlockchainLog to MongoDB

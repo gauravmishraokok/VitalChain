@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const BlockchainLogSchema = new mongoose.Schema({
-    tx_hash: { type: String, unique: true },
+    tx_hash: { type: String, unique: true, sparse: true },
     block_number: Number,
     merkle_root: String,
     ipfs_cid: String,

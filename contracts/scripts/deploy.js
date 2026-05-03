@@ -36,12 +36,12 @@ async function main() {
     // Save addresses
     fs.writeFileSync(addressPath, JSON.stringify(addresses, null, 2));
     
-    // Export ABIs
+    // Export ABIs (wrapped in object so eth_client.py can read ['abi'])
     const auditArtifact = await hre.artifacts.readArtifact("MedicalAudit");
-    fs.writeFileSync(path.join(abiDir, "MedicalAudit.json"), JSON.stringify(auditArtifact.abi, null, 2));
+    fs.writeFileSync(path.join(abiDir, "MedicalAudit.json"), JSON.stringify({ abi: auditArtifact.abi }, null, 2));
     
     const daoArtifact = await hre.artifacts.readArtifact("TriageDAO");
-    fs.writeFileSync(path.join(abiDir, "TriageDAO.json"), JSON.stringify(daoArtifact.abi, null, 2));
+    fs.writeFileSync(path.join(abiDir, "TriageDAO.json"), JSON.stringify({ abi: daoArtifact.abi }, null, 2));
     
     console.log("MedicalAudit deployed to:", auditAddr);
     console.log("TriageDAO deployed to:", daoAddr);

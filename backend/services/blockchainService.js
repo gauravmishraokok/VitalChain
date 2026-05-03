@@ -16,7 +16,8 @@ class BlockchainService {
 
         try {
             if (fs.existsSync(abiPath) && fs.existsSync(addrPath)) {
-                const abi = JSON.parse(fs.readFileSync(abiPath, 'utf8'));
+                const abiData = JSON.parse(fs.readFileSync(abiPath, 'utf8'));
+                const abi = abiData.abi || abiData; // support both { abi: [...] } and bare arrays
                 const addresses = JSON.parse(fs.readFileSync(addrPath, 'utf8'));
                 const address = addresses.MedicalAudit;
                 this.contract = new this.web3.eth.Contract(abi, address);

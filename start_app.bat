@@ -43,7 +43,17 @@ REM  STEP 3 — Ganache (local Ethereum testnet)
 REM ─────────────────────────────────────────────────────────────────────────────
 echo [3/7] Starting Ganache (Local Ethereum)...
 start "VitalChain: Ganache" cmd /k "npx ganache --port 8545 --chain.chainId 1337"
-ping 127.0.0.1 -n 6 > nul
+ping 127.0.0.1 -n 8 > nul
+
+REM ─────────────────────────────────────────────────────────────────────────────
+REM  STEP 3b — Deploy smart contracts to fresh Ganache instance
+REM ─────────────────────────────────────────────────────────────────────────────
+echo [3b] Deploying Smart Contracts to Ganache...
+cd /d %~dp0contracts
+npx hardhat run scripts/deploy.js --network localhost
+cd /d %~dp0
+echo       Contracts deployed and ABI/address exported.
+echo.
 
 REM ─────────────────────────────────────────────────────────────────────────────
 REM  STEP 4 — Bootstrap Auth (generates auth_state.json if missing)

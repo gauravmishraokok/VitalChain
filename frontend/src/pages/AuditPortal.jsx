@@ -14,8 +14,9 @@ const AuditPortal = () => {
         const res = await axios.get('/api/audit/logs', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
-        setLogs(res.data);
-        if (res.data.length > 0) setSelectedLog(res.data[0]);
+        const validLogs = res.data.filter(l => l.tx_hash && l.merkle_root);
+        setLogs(validLogs);
+        if (validLogs.length > 0) setSelectedLog(validLogs[0]);
       } catch (err) {
         console.error('Audit logs fetch failed', err);
       }
@@ -59,9 +60,9 @@ const AuditPortal = () => {
                       onClick={() => setSelectedLog(log)}
                       className={`border-b border-white/5 hover:bg-white/5 cursor-pointer transition-colors ${selectedLog?.tx_hash === log.tx_hash ? 'bg-accent-green/10' : ''}`}
                     >
-                      <td className="py-4 px-2 font-mono text-accent-cyan">{log.tx_hash.slice(0, 12)}...</td>
+                      <td className="py-4 px-2 font-mono text-accent-cyan">{(log.tx_hash ?? '0x—').slice(0, 12)}...</td>
                       <td className="py-4 px-2 text-text-primary">{log.block_number}</td>
-                      <td className="py-4 px-2 font-mono text-text-muted">{log.merkle_root.slice(0, 12)}...</td>
+                      <td className="py-4 px-2 font-mono text-text-muted">{(log.merkle_root ?? '000000000000').slice(0, 12)}...</td>
                       <td className="py-4 px-2">{log.batch_size} pkts</td>
                     </tr>
                   ))}
