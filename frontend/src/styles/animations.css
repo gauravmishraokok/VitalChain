@@ -1,0 +1,52 @@
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes ecg-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes cascade-in {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes critical-flash {
+  0%, 100% { background: transparent; }
+  50% { background: rgba(255, 51, 85, 0.15); }
+}
+
+@keyframes hash-fall {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(100%); opacity: 1; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--accent-cyan); }
+  50% { box-shadow: 0 0 24px var(--accent-cyan); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.animate-cascade-in { animation: cascade-in 0.5s ease-out forwards; }
+.animate-critical-flash { animation: critical-flash 1s ease-in-out infinite; }
+.animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-shake { animation: shake 0.2s ease-in-out 3; }
+.animate-float { animation: float 3s ease-in-out infinite; }
