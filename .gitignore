@@ -1,0 +1,72 @@
+# Dependencies
+node_modules/
+dist/
+build/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.venv
+.env
+.tox
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.mypy_cache/
+.pytest_cache/
+.hypothesis/
+
+# VitalChain Specific State Files (Runtime Generated)
+python_core/device_ids.json
+python_core/auth_state.json
+python_core/did_registry.json
+python_core/keys/
+python_core/ipfs_mock/
+device_ids.json
+auth_state.json
+did_registry.json
+keys/
+ipfs_mock/
+*.pkl
+
+# Blockchain / Hardhat
+contracts/artifacts/
+contracts/cache/
+contracts/typechain/
+contracts/deployed_address.json
+contracts/VitalLoggerABI.json
+backend/VitalLoggerABI.json
+frontend/src/VitalLoggerABI.json
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+*.log
+backend/logs/
+gateway.log
+simulator.log
+
+# Databases
+data/
+db/
